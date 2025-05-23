@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Todo List</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Todo List</h1>
+    <form action="/add" method="POST">
+      <input type="text" name="title" placeholder="Enter a task" required>
+      <select name="priority">
+        <option value="low">Low</option>
+        <option value="high">High</option>
+        <option value="urgent">Urgent</option>
+      </select>
+      <button type="submit">Add</button>
+    </form>
+
+    <ul>
+      <% tasks.forEach(task => { %>
+        <li>
+          <form action="/edit/<%= task._id %>?_method=PUT" method="POST">
+            <input type="text" name="title" value="<%= task.title %>" required>
+            <select name="priority">
+              <option <%= task.priority === 'low' ? 'selected' : '' %>>low</option>
+              <option <%= task.priority === 'high' ? 'selected' : '' %>>high</option>
+              <option <%= task.priority === 'urgent' ? 'selected' : '' %>>urgent</option>
+            </select>
+            <button type="submit"><i class="fas fa-pencil-alt"></i></button>
+          </form>
+          <form action="/delete/<%= task._id %>?_method=DELETE" method="POST" style="display:inline;">
+            <button type="submit"><i class="fas fa-trash"></i></button>
+          </form>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+</body>
+</html>
