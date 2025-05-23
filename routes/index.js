@@ -1,65 +1,60 @@
 const express = require('express');
 const router = express.Router();
-const Task = require('../models/Task');
+const Student = require('../models/Students'); // fix model import path
 
-// =======================
-// 🔍 Show All Tasks
-// =======================
+// Show All Students
 router.get('/', async (req, res) => {
   try {
-    const tasks = await Task.find().sort({ createdAt: -1 }); // optional sorting
-    res.render('index', { tasks });
+    const students = await Student.find().sort({ createdAt: -1 });
+    res.render('students', { students });
   } catch (err) {
-    console.error('Error fetching tasks:', err);
+    console.error('Error fetching students:', err);
     res.status(500).send('Internal Server Error');
   }
 });
 
-// =======================
-// ➕ Add New Task
-// =======================
+// Add New Student
 router.post('/add', async (req, res) => {
-  const { title, priority } = req.body;
-  if (!title || !title.trim()) {
-    return res.send('<script>alert("Task title cannot be empty!"); window.location="/";</script>');
+  const { name, age, city, class: className } = req.body;
+
+  if (!name || !city || !className || age == null) {
+    return res.send('<script>alert("All fields are required!"); window.location="/students";</script>');
   }
 
   try {
-    await Task.create({ title: title.trim(), priority });
-    res.redirect('/');
+    await Student.create({ name: name.trim(), age, city: city.trim(), class: className.trim() });
+    res.redirect('/students');
   } catch (err) {
-    console.error('Error adding task:', err);
+    console.error('Error adding student:', err);
     res.status(500).send('Internal Server Error');
   }
 });
 
-// =======================
-// ✏️ Edit Task
-// =======================
+// Edit Student
 router.put('/edit/:id', async (req, res) => {
-  const { title, priority } = req.body;
+  const { name, age, city, class: className } = req.body;
 
   try {
-    await Task.findByIdAndUpdate(req.params.id, {
-      title: title.trim(),
-      priority
+    await Student.findByIdAndUpdate(req.params.id, {
+      name: name.trim(),
+      age,
+      city: city.trim(),
+      class: className.trim()
     });
-    res.send('<script>alert("Todo updated successfully!"); window.location="/";</script>');
+    res.send('<script>alert("Student updated successfully!"); window.location="/students";</script>');
   } catch (err) {
-    console.error('Error updating task:', err);
+    console.error('Error updating student:', err);
     res.status(500).send('Internal Server Error');
   }
 });
 
-// =======================
-// ❌ Delete Task
-// =======================
+// Delete Student
 router.delete('/delete/:id', async (req, res) => {
   try {
-    await Task.findByIdAndDelete(req.params.id);
-    res.send('<script>alert("Todo deleted successfully!"); window.location="/";</script>');
+    await Student.findByIdAndDelete(req.params.id);
+    res.send('<script>alert("Student deleted successfully!"); window.location="/students";</script>');
   } catch (err) {
-    console.error('Error deleting task:', err);
+    console.error('Error deleting student:', err);
     res.status(500).send('Internal Server Error');
   }
 });

@@ -1,31 +1,155 @@
+/* Reset some defaults */
+* {
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-  }
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f7fa;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.container {
+  width: 90%;
+  max-width: 700px;
+  margin: 3rem auto;
+  background: #fff;
+  padding: 2rem 3rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: #222;
+}
+
+/* Form Styles */
+form {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+input[type="text"],
+input[type="number"] {
+  flex: 1 1 120px;
+  padding: 0.6rem 0.8rem;
+  border: 1.8px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+button {
+  background-color: #4a90e2;
+  border: none;
+  color: white;
+  padding: 0.7rem 1.6rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #357ABD;
+}
+
+/* Student List */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background: #fafafa;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Edit form inside each list item */
+li form {
+  flex: 1 1 70%;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+li input[type="text"],
+li input[type="number"] {
+  flex: 1 1 100px;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+li button {
+  flex: 0 0 auto;
+  padding: 0.5rem 0.7rem;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Delete form button styling */
+li form + form button {
+  background-color: #e74c3c;
+}
+
+li form + form button:hover {
+  background-color: #c0392b;
+}
+
+/* Icons color */
+button i {
+  pointer-events: none;
+  color: white;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
   .container {
-    width: 60%;
-    margin: 2em auto;
-    text-align: center;
-  }
-  form {
-    margin-bottom: 1em;
-  }
-  input[type="text"], select {
-    padding: 0.5em;
-    margin: 0.2em;
-  }
-  button {
-    padding: 0.5em 1em;
-    margin-left: 0.2em;
-    cursor: pointer;
-  }
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-  li {
-    margin: 1em 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 95%;
+    padding: 1.5rem 1.5rem;
   }
   
+  li form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  li input[type="text"],
+  li input[type="number"] {
+    width: 100%;
+  }
+  
+  li button {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}
