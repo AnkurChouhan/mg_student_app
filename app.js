@@ -47,7 +47,7 @@ app.use((req, res) => {
 });
 
 // Use port 3000 for the web server (instead of 27017 which is MongoDB's port)
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
   console.log(`🚀 Server started on http://localhost:${PORT}`);
 });
