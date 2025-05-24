@@ -7,7 +7,7 @@ const studentRoutes = require('./routes/index');
 const app = express();
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/todoDB', {
+mongoose.connect('mongodb+srv://ankurchouhanofficial:Txc1xnhu5ktZFnWz@cluster777.i70wgbx.mongodb.net/', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
